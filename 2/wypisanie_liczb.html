@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>Wypisanie liczb</title>
+	
+	<script type="text/javascript">
+	
+		function wypisz()
+		{
+			var napis= "";
+			var liczba1 = document.getElementById("pole1").value;
+			var liczba2 = document.getElementById("pole2").value;
+			if (liczba1.length == 0 || liczba2.length == 0) {
+				napis = "pola nie mogą pozostać puste! " ;
+			}
+			else {
+				liczba1=Number(liczba1);
+				liczba2=Number(liczba2);
+			
+				if (!isNaN(liczba1) && isNaN(liczba2)) {
+					napis = "w prawym polu nie ma liczby"; }
+				else if (isNaN(liczba1) && !isNaN(liczba2)){ 
+					napis = "w lewym polu nie ma liczby"; }
+				else if (isNaN(liczba1) && isNaN(liczba2)) { 
+					napis = "w zadnym z pol nie ma liczby"; }
+				else if (liczba2>liczba1){
+					for (i=liczba1; i<=liczba2; i++)
+					{
+						napis = napis + " " + i;
+					}
+				}
+				else if (liczba1>liczba2){
+					for (i=liczba1; i>=liczba2; i--)
+					{
+						napis = napis + " " + i;
+					}
+				}
+			}	
+		document.getElementById("wynik").innerHTML = napis;
+		}
+	
+	
+	</script>
+	
+</head>
+<body>
+	
+	<input type="text" id="pole1"/>
+	<input type="text" id="pole2"/>
+	<input type="submit" value="Pokaż" onclick="wypisz()"/>
+	
+	<div id="wynik"><div/>
+	
+</body>
+</html>

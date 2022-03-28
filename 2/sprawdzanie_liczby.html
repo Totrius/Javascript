@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>Sprawdzanie liczby</title>
+	
+	<script type="text/javascript">
+	
+		function sprawdz()
+		{
+			var liczba = document.getElementById("pole").value;
+			
+			if (liczba>0) document.getElementById("wynik").innerHTML="Liczba dodatnia";
+			else if (liczba<0) document.getElementById("wynik").innerHTML="Liczba ujemna";
+			else if (liczba=="0") document.getElementById("wynik").innerHTML="Liczba równa zero";
+			else document.getElementById("wynik").innerHTML="Liczba - to nawet nie jest ona";
+			
+			
+		
+		
+		
+		}
+	
+	
+	</script>
+	
+</head>
+<body>
+	
+	
+	<input type="text" id="pole"/>
+	<input type="submit" value="Sprawdź" onclick="sprawdz()"/>
+	
+	<div id="wynik"></div>
+ 
+	
+</body>
+</html>
