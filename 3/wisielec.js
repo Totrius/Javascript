@@ -1,49 +1,61 @@
-let baza = new Array(14);
-baza[0] = "Bez pracy nie ma kołaczy";
-baza[1] = "żółć";
-baza[2] = "antyterrorystyczna grupa świerszczy";
-baza[3] = "imperialistyczne frankfurterki";
-baza[4] = "aleksandryjskie królestwo chusteczek";
-baza[5] = "frywolne zakonnice";
-baza[6] = "hegemonistyczne zapędy kuropatw";
-baza[7] = "pięćdziesięciogroszówka";
-baza[8] = "dźwiękonaśladownictwo";
-baza[9] = "nogogłaszczki";
-baza[10] = "transcendentalia";
-baza[11] = "liczba zmiennoprzecinkowa";
-baza[12] = "prawdopodobieństwo";
-baza[13] = "błąd paralaksy";
+// let baza = new Array(14);
+const baza = [
+	"Bez pracy nie ma kołaczy",
+	"żółć",
+	"antyterrorystyczna grupa świerszczy",
+	"imperialistyczne frankfurterki",
+	"aleksandryjskie królestwo chusteczek",
+	"frywolne zakonnice",
+	"hegemonistyczne zapędy kuropatw",
+	"pięćdziesięciogroszówka",
+	"dźwiękonaśladownictwo",
+	"nogogłaszczki",
+	"transcendentalia",
+	"liczba zmiennoprzecinkowa",
+	"prawdopodobieństwo",
+	"błąd paralaksy",
+];
+
 window.onload = start;
-let haslo = baza[8];//baza[Math.floor(Math.random()*14)];
+// let haslo = baza[Math.floor(Math.random()*14)];
+let haslo = baza[Math.floor(Math.random() * baza.length)];
 haslo = haslo.toUpperCase();
 
-let dlugosc = haslo.length;
-let haslo1 = "";
+
+const dlugosc = haslo.length;
+let ukryteHaslo = "";
 let ile_skuch = 0;
 
-let dobrze = new Audio("dobrze.wav");
-let zle = new Audio("zle.wav");
+// let dobrze = new Audio("dobrze.wav");
+// let zle = new Audio("zle.wav");
+const dobrze = new Audio("dobrze.wav");
+const zle = new Audio("zle.wav");
 
-for (i=0; i<dlugosc; i++)
+// for (i=0; i<dlugosc; i++)
+for (let i=0; i<dlugosc; i++)
 {
 	if(haslo.charAt(i) == " ") 
 	{
-		haslo1 = haslo1 + " ";
+		ukryteHaslo = ukryteHaslo + " ";
+		// ukryteHaslo += " ";
 	}
 	else 
 	{
-		haslo1 = haslo1 + "_";
+		ukryteHaslo = ukryteHaslo + "_";
 	}
 }
 
 function wypisz_haslo()
 {
-	document.getElementById("plansza").innerHTML = haslo1;
+	// document.getElementById("plansza").innerHTML = ukryteHaslo;
+	document.getElementById("plansza").innerText = ukryteHaslo;
 }
 
 
 
 const litery = "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŻŹ".split("");
+
+// koniec na dziś
 
 function start()
 {
@@ -85,7 +97,7 @@ function sprawdz(nr)
 	{
 		if (haslo.charAt(i) == litery[nr])
 		{
-			haslo1 = haslo1.ustawZnak(i, litery[nr]);
+			ukryteHaslo = ukryteHaslo.ustawZnak(i, litery[nr]);
 			trafiona = true;
 		}
 	}
@@ -117,7 +129,7 @@ function sprawdz(nr)
 		
 	}
 	//wygrana
-	if (haslo == haslo1)
+	if (haslo == ukryteHaslo)
 	{
 		document.getElementById("klawiatura").innerHTML = "Tak jest! Podano prawidłowe hasło! " + haslo + '<br/><br/><span class="reset" onclick="location.reload()"> JESZCZE RAZ??</span>';
 	}
