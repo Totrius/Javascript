@@ -62,3 +62,13 @@ body
 {
 	color: white;
 }
+
+.popup {
+	position: fixed;
+	top: 100px;
+	right: 300px;
+	background: yellow;
+	color: black;
+	padding: 30px;
+	border: 2px solid gray;
+}
