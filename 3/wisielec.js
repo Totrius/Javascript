@@ -1,44 +1,101 @@
-let baza = new Array(14);
-baza[0] = "Bez pracy nie ma kołaczy";
-baza[1] = "żółć";
-baza[2] = "antyterrorystyczna grupa świerszczy";
-baza[3] = "imperialistyczne frankfurterki";
-baza[4] = "aleksandryjskie królestwo chusteczek";
-baza[5] = "frywolne zakonnice";
-baza[6] = "hegemonistyczne zapędy kuropatw";
-baza[7] = "pięćdziesięciogroszówka";
-baza[8] = "dźwiękonaśladownictwo";
-baza[9] = "nogogłaszczki";
-baza[10] = "transcendentalia";
-baza[11] = "liczba zmiennoprzecinkowa";
-baza[12] = "prawdopodobieństwo";
-baza[13] = "błąd paralaksy";
-window.onload = start;
-let haslo = baza[8];//baza[Math.floor(Math.random()*14)];
+const baza = [
+ "Bez pracy nie ma kołaczy",
+ "żółć",
+ "antyterrorystyczna grupa świerszczy",
+ "imperialistyczne frankfurterki",
+ "aleksandryjskie królestwo chusteczek",
+ "frywolne zakonnice",
+ "hegemonistyczne zapędy kuropatw",
+ "pięćdziesięciogroszówka",
+ "dźwiękonaśladownictwo",
+ "nogogłaszczki",
+ "transcendentalia",
+ "liczba zmiennoprzecinkowa",
+ "prawdopodobieństwo",
+ "błąd paralaksy",
+ "nawigacja",
+ "arachnofobia",
+ "rekonwalescencja",
+ "resocjalizacja",
+ "kontrefekt",
+ "familiant",
+ "wyranżerowawszy",
+ "rozentuzjazmowany",
+ "wypatroszona żaba",
+ "nastroszenie jeżozwierza",
+ "fenoloftaleina",
+ "proletariat",
+ "interdyscyplinarny",
+ "immanencja",
+ "systematyzacja",
+ "wielobranżowy",
+ "strukturyzacja",
+ "solenizant",
+ "bynajmniej",
+ "lawirantka",
+ "knajak",
+ "nietuzinkowy",
+ "empiryczny",
+ "androgeniczny",
+ "pejoratywny",
+ "eklektyczny",
+ "spolegliwy",
+ "wysublimowany",
+ "bezprecedensowy",
+ "enigmatyczny",
+ "pruderyjny",
+ "paradygmat",
+ "semantyczny",
+ "alegoria",
+ "konfabulacja",
+ "konotacja",
+ "kompilacja",
+ "behawioralny",
+ "adekwatny",
+ "tabula rasa",
+ "ergonomiczny",
+ "deprecjonować",
+ "rewizja",
+ "etymologia",
+ "zbić z pantałyku",
+ "dialektologia",
+ "słowotwórstwo",
+ "neologizm",
+ "frazeologizm",
+ "językoznawstwo",
+ "morfologia",
+ "krzyżówka",
+ "mistycyzm",
+ "metafizyka",
+ "zootechnika",
+ "psychologia",
+];
+window.addEventListener("DOMContentLoaded", start);
+let haslo = baza[Math.floor(Math.random()*baza.length)];
 haslo = haslo.toUpperCase();
-
+const liczbaProb = 9;
 let dlugosc = haslo.length;
-let haslo1 = "";
+let ukryteHaslo = "";
 let ile_skuch = 0;
 
-let dobrze = new Audio("dobrze.wav");
-let zle = new Audio("zle.wav");
+const dobrze = new Audio("dobrze.wav");
+const zle = new Audio("zle.wav");
 
-for (i=0; i<dlugosc; i++)
+for (let i=0; i<dlugosc; i++)
 {
 	if(haslo.charAt(i) == " ") 
 	{
-		haslo1 = haslo1 + " ";
+		ukryteHaslo = ukryteHaslo + " ";
 	}
 	else 
 	{
-		haslo1 = haslo1 + "_";
+		ukryteHaslo = ukryteHaslo + "_";
 	}
 }
 
 function wypisz_haslo()
 {
-	document.getElementById("plansza").innerHTML = haslo1;
+	document.getElementById("plansza").innerText = ukryteHaslo;
 }
 
 
@@ -50,10 +107,10 @@ function start()
 	
 	let tresc_diva = "";
 	
-	for (i=0; i<=34; i++)
+	for (let i=0; i<=34; i++)
 	{
 		let element = "lit" + i;
-		tresc_diva = tresc_diva + '<div id="'+element+'" class="litera" onclick="sprawdz('+i+')">' + litery[i] + '</div>';
+		tresc_diva = tresc_diva + `<div id="${element}" class="litera" onclick="sprawdz(${i})"> ${litery[i]} </div>`;
 		if ((i+1)%7 == 0)
 		{
 			tresc_diva = tresc_diva + '<div style="clear: both;"></div>';
@@ -81,48 +138,50 @@ function sprawdz(nr)
 	
 	let trafiona = false;
 	
-	for(i=0; i<dlugosc; i++)
+	for(let i=0; i<dlugosc; i++)
 	{
 		if (haslo.charAt(i) == litery[nr])
 		{
-			haslo1 = haslo1.ustawZnak(i, litery[nr]);
+			ukryteHaslo = ukryteHaslo.ustawZnak(i, litery[nr]);
 			trafiona = true;
 		}
 	}
 	if	(trafiona == true)
 	{
 		dobrze.play();
-		let element = "lit" + nr;
+		const idElementu = "lit" + nr;
+		const element = document.getElementById(idElementu);
 	
-		document.getElementById(element).style.background = "#003300";
-		document.getElementById(element).style.color = "#00C000";
-		document.getElementById(element).style.border = "3px solid #00C000";
-		document.getElementById(element).style.cursor = "default";
+		element.style.background = "#003300";
+		element.style.color = "#00C000";
+		element.style.border = "3px solid #00C000";
+		element.style.cursor = "default";
 		
 		wypisz_haslo();
 	}
 	else
 	{
 		zle.play();
-		let element = "lit" + nr;
-		document.getElementById(element).style.background = "#330000";
-		document.getElementById(element).style.color = "#C00000";
-		document.getElementById(element).style.border = "3px solid #C00000";
-		document.getElementById(element).style.cursor = "default";
-		document.getElementById(element).setAttribute("onclick", ";");
+		const idElementu = "lit" + nr;
+		const element = document.getElementById(idElementu);
+		element.style.background = "#330000";
+		element.style.color = "#C00000";
+		element.style.border = "3px solid #C00000";
+		element.style.cursor = "default";
+		element.setAttribute("onclick", ";");
 		
 		ile_skuch++;
 		let obraz = "img/s" + ile_skuch + ".jpg"
-		document.getElementById("szubienica").innerHTML = '<img src="' + obraz + '"alt=""/>'
+		document.getElementById("szubienica").innerHTML = `<img src="${obraz}"alt=""/>`
 		
 	}
 	//wygrana
-	if (haslo == haslo1)
+	if (haslo == ukryteHaslo)
 	{
 		document.getElementById("klawiatura").innerHTML = "Tak jest! Podano prawidłowe hasło! " + haslo + '<br/><br/><span class="reset" onclick="location.reload()"> JESZCZE RAZ??</span>';
 	}
 	//porażka
-	if (ile_skuch >= 9)
+	if (ile_skuch >= liczbaProb)
 	{
 		document.getElementById("klawiatura").innerHTML = "Przrgrana, nie udało się zgadnąć hasła: " + haslo + '<br/><br/><span class="reset" onclick="location.reload()"> JESZCZE RAZ??</span>';
 	}
