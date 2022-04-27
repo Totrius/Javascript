@@ -31,3 +31,44 @@ body
     line-height: 1;
     font-size: 29px;
 }
+canvas {  
+  display: inline; 
+}
+
+#gui {
+  left: auto;
+  right: auto;
+  position: absolute;
+  top: 0;
+}
+@keyframes pulse {
+  0% {
+    font-size: 29px;
+    text-shadow:  #00C000 1px 1px,  #00C000 2px 2px;
+    color: #00c000;
+  }
+  100% {
+    font-size: 40px;
+    text-shadow:  #3700ff 3px 3px,  #3700ff 4px 4px;
+    color: #ff0000;
+  }
+}
+
+.pulse {
+  /* animation: pulse 2s ease-in-out 0 infinite alternate; */
+  /*animations*/
+  width: 30px;
+  height: 30px;
+  font-family: 'Architects Daughter', cursive;
+  border: 1px solid rgb(26, 38, 49);
+  float: left;
+  text-align: center;
+  line-height: 1;
+  font-size: 29px;
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
