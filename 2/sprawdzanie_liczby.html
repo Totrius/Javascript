@@ -20,6 +20,21 @@
 		
 		
 		}
+		let x=0;
+        x= 1.005;
+        x = Math.round(x*100)/100; //round zaokrągla do jedności, więc trzeba mnożyć i dzielić o 10^(które miejsce po przecinku)
+        document.write(x+"<br />");
+        x = 1.005;
+        x = x.toFixed(2);
+        document.write(x+"<br />");
+
+        Number.prototype.round = function (miejsc) { // "poprawienie" rounda - dodanie argumentu 
+            return +(Math.round(this+"e+" + miejsc) + "e-"+miejsc); // this oznacz obiekt, na rzecz którego wywołana jest funkcja - np x.round -> this = x... e+ i e- to przesuwanie przecinka 
+        }
+
+        x = 1.005;
+        x = x.round(2);
+        document.write(x+"<br />");
 	
 	
 	</script>
