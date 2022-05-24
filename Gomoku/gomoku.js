@@ -13,7 +13,7 @@ function utworzTablice()
 {
     for (let i = 0; i < 55; i++) {
         mojaPlansza[i]=[];
-        for (let j = 0; j < 30; j++) {
+        for (let j = 0; j < 27; j++) {
             mojaPlansza[i][j]="Q";
         }
         
@@ -23,11 +23,11 @@ function utworzTablice()
 function utworzPlansze ()
 {
     let pola = "";
-    for (let i=0; i<30; i++)
+    for (let i=0; i<27; i++)
 	{
         for (let j = 0; j < 55; j++) {
             let element = `pole[${j}][${i}]`;
-            pola = pola + `<div id="${element}" class ="kratka" onclick="wstawZnak(${j},${i})"></div>`;    
+            pola = pola + `<div id="${element}" class ="kratka" onclick="wstawZnak(${j},${i}, event)"></div>`;    
         }
         pola = pola + `<div style="clear: both;"></div>`;
 		
@@ -36,8 +36,9 @@ function utworzPlansze ()
 	document.getElementById("plansza").innerHTML = pola;
 
 }
-function wstawZnak(x,y) 
+function wstawZnak(x,y, event) 
 {
+    console.log(event);
     gracz = gracz%2;
     const idPola = `pole[${x}][${y}]`;
     const pole = document.getElementById(idPola);
@@ -51,6 +52,7 @@ function wstawZnak(x,y)
             mojaPlansza[x][y] = "O";
             break;
     }
+    createOrb({x:event.clientX, y:event.clientY});
     pole.setAttribute("onclick",";");
     pole.style.cursor="default";
     gracz++;
@@ -218,6 +220,8 @@ function fajnaAnimacja() {
         y = ( config && config.y ) ? config.y : sketch.mouse.y;
   	orbs.push( new Orb( x, y ) );
   };
+
+  window.createOrb = createOrb;
 
   var turnOnMove = function(){
   	sketch.mousemove = createOrb;	
