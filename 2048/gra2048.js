@@ -1,5 +1,4 @@
 let tablicaWartosci = [];
-const kolejneLiczby = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048];
 function start() {
     generujPlansze();
     dodajDwojke();
@@ -24,9 +23,9 @@ function dodajDwojke() {
     while(tablicaWartosci[losowePole]!=0){
         losowePole = Math.random()*16;
     }
-    zmienWartosc(losowePole, 2);
+    zmienWartoscPola(losowePole, 2);
 }
-function zmienWartosc(nrPola, wartosc) {
+function zmienWartoscPola(nrPola, wartosc) {
     let kolor = '';
     tablicaWartosci[nrPola] = wartosc;
     switch (wartosc) {
@@ -97,14 +96,38 @@ function przesuniecie(kierunek) {
             skokPola = 4;
             break;
     }
+
     for (let i = 0; i<4; i++){
-        //nr pola = poczatek + i*skokLinii +j*skokPola
+        nrPola = poczatek+ i*skokLinii;
+        if (tablicaWartosci[nrPola] !=0 && tablicaWartosci[nrPola] == tablicaWartosci[nrPola + skokPola]){ //0 i 1
+            zmienWartoscPola(nrPola, (2*tablicaWartosci[nrPola]));
+            zmienWartoscPola(nrPola+skokPola, 0);
+        } else if (tablicaWartosci[nrPola + skokPola]!= 0 && tablicaWartosci[nrPola + skokPola] == tablicaWartosci[nrPola + 2*skokPola]){// 1 i 2
+            zmienWartoscPola(nrPola + skokPola, (2*tablicaWartosci[nrPola + skokPola]));
+            zmienWartoscPola(nrPola + 2*skokPola, 0);
+        } else if (tablicaWartosci[nrPola] !=0 && tablicaWartosci[nrPola] == tablicaWartosci[nrPola + 2*skokPola] && tablicaWartosci[nrPola + skokPola]==0){ // 0 i 2
+            zmienWartoscPola(nrPola, (2*tablicaWartosci[nrPola]));
+            zmienWartoscPola(nrPola + 2*skokPola, 0);
+            //0 i 3
+        } else if (tablicaWartosci[nrPola] !=0 && tablicaWartosci[nrPola] == tablicaWartosci[nrPola + 3*skokPola] && tablicaWartosci[nrPola + skokPola]==0 && tablicaWartosci[nrPola + 2*skokPola]==0){
+            zmienWartoscPola(nrPola, (2*tablicaWartosci[nrPola]));
+            zmienWartoscPola(nrPola + 3*skokPola, 0);
+        } else if (tablicaWartosci[nrPola + skokPola] !=0 && tablicaWartosci[nrPola + skokPola] == tablicaWartosci[nrPola + 3*skokPola] && tablicaWartosci[nrPola + 2*skokPola]==0){ // 1 i 3
+            zmienWartoscPola(nrPola + skokPola, (2*tablicaWartosci[nrPola+ skokPola]));
+            zmienWartoscPola(nrPola + 3*skokPola, 0);
+        } 
+        if (tablicaWartosci[nrPola+2*skokPola] !=0 && tablicaWartosci[nrPola+2*skokPola] == tablicaWartosci[nrPola + 3*skokPola]){ // 2 i 3
+            zmienWartoscPola(nrPola+2*skokPola, (2*tablicaWartosci[nrPola+2*skokPola]));
+            zmienWartoscPola(nrPola + 3*skokPola, 0);
+        }
+    }
+    for (let i = 0; i<4; i++){
         for (let k = 0; k<3; k++){
             for (let j = 1; j < 4; j++){
                  nrPola = poczatek + i*skokLinii + j*skokPola;
                  if(tablicaWartosci[nrPola-skokPola]==0 && tablicaWartosci[nrPola]!=0){
-                    zmienWartosc((nrPola-skokPola), tablicaWartosci[nrPola]);
-                    zmienWartosc(nrPola, 0);
+                    zmienWartoscPola((nrPola-skokPola), tablicaWartosci[nrPola]);
+                    zmienWartoscPola(nrPola, 0);
                  }
             }
         }
